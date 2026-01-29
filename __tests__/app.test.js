@@ -3,23 +3,11 @@ const app = require('../index');
 
 describe('Express App', () => {
   describe('GET /', () => {
-    it('should return 200 status', async () => {
+    it('should return the homepage with correct status, content type, and haiku content', async () => {
       const response = await request(app).get('/');
       expect(response.status).toBe(200);
-    });
-
-    it('should return HTML content', async () => {
-      const response = await request(app).get('/');
       expect(response.type).toBe('text/html');
-    });
-
-    it('should include haiku content', async () => {
-      const response = await request(app).get('/');
       expect(response.text).toContain('rain in seattle');
-    });
-
-    it('should render haikus from haikus.json', async () => {
-      const response = await request(app).get('/');
       expect(response.text).toMatch(/rain in seattle|my tunes on repeat|snow is still falling/);
     });
   });
